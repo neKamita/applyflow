@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: applyflow
+
+resources:
+  - namespace.yaml
+  - config.yaml
+  - infrastructure/postgres.yaml
+  - infrastructure/rabbitmq.yaml
+  - infrastructure/redis.yaml
+  - services/application-service.yaml
+  - services/payment-service.yaml
+  - services/notification-service.yaml
+  - services/gateway.yaml
+  - network-policy.yaml
+
+secretGenerator:
+  - name: applyflow-secrets
+    envs:
+      - secrets.env
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: applyflow

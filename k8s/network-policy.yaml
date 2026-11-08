@@ -1,0 +1,58 @@
+# Zero-trust inside the namespace: deny all ingress, then allow only the paths the system needs.
+# Backend services trust the X-User-Id header, so nothing except the gateway may call them.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes: ["Ingress"]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: gateway-from-anywhere
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: gateway
+  ingress:
+    - ports:
+        - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-from-gateway
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: backend
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: gateway
+      ports:
+        - port: 8081
+        - port: 8082
+        - port: 8083
+    # Kubelet probes come from the node and are not affected by NetworkPolicy on most CNIs.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: infrastructure-from-apps
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values: ["postgres", "rabbitmq", "redis"]
+  ingress:
+    - from:
+        - podSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/component
+                operator: In
+                values: ["backend", "gateway"]

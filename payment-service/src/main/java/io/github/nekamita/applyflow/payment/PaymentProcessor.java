@@ -18,6 +18,7 @@ import io.github.nekamita.applyflow.payment.provider.PaymentProvider;
 import io.github.nekamita.applyflow.payment.provider.PaymentProvider.Approved;
 import io.github.nekamita.applyflow.payment.provider.PaymentProvider.ChargeResult;
 import io.github.nekamita.applyflow.payment.provider.PaymentProvider.Declined;
+import io.github.nekamita.applyflow.payment.provider.PaymentProviderUnavailableException;
 import io.micrometer.core.instrument.MeterRegistry;
 
 @Service
@@ -64,8 +65,16 @@ public class PaymentProcessor {
             return;
         }
 
-        ChargeResult result = paymentProvider.charge(application.applicationId().toString(),
-                application.feeAmount(), application.currency(), application.paymentToken());
+        ChargeResult result;
+        try {
+            result = paymentProvider.charge(application.applicationId().toString(),
+                    application.feeAmount(), application.currency(), application.paymentToken());
+        } catch (PaymentProviderUnavailableException e) {
+            log.warn("Charge for application {} failed transiently, the message will be retried: {}",
+                    application.applicationId(), e.getMessage());
+            meterRegistry.counter("applyflow.payments", "outcome", "transient_failure").increment();
+            throw e;
+        }
 
         switch (result) {
             case Approved approved -> {

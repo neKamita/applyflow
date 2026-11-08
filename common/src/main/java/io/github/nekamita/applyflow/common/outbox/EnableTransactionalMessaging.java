@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 /**
  * Enables the transactional outbox (reliable publishing) and inbox (deduplicated consuming).
  * The service must own the {@code outbox_events} and {@code processed_messages} tables;
- * see {@code docs/messaging.md}.
+ * see the "Reliable messaging" section of the README.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

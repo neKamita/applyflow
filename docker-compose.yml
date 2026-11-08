@@ -1,0 +1,112 @@
+name: applyflow
+
+x-service: &service
+  restart: unless-stopped
+  environment: &service-env
+    RABBITMQ_HOST: rabbitmq
+    REDIS_HOST: redis
+    DB_USERNAME: applyflow
+    DB_PASSWORD: applyflow
+  depends_on: &service-deps
+    postgres:
+      condition: service_healthy
+    rabbitmq:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: applyflow
+      POSTGRES_PASSWORD: applyflow
+    volumes:
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U applyflow -d payments"]
+      interval: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    ports:
+      - "15672:15672" # management UI, guest/guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
+      interval: 5s
+      retries: 20
+
+  redis:
+    image: redis:8-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  application-service:
+    <<: *service
+    build: { context: ., args: { MODULE: application-service } }
+    image: applyflow/application-service:local
+    environment:
+      <<: *service-env
+      DB_URL: jdbc:postgresql://postgres:5432/applications
+    healthcheck: &healthcheck
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/actuator/health/readiness"]
+      interval: 5s
+      retries: 30
+
+  payment-service:
+    <<: *service
+    build: { context: ., args: { MODULE: payment-service } }
+    image: applyflow/payment-service:local
+    environment:
+      <<: *service-env
+      DB_URL: jdbc:postgresql://postgres:5432/payments
+      # Every third charge attempt fails transiently, so the retries are visible in the logs.
+      PAYMENT_TRANSIENT_FAILURE_RATE: "0.3"
+    healthcheck:
+      <<: *healthcheck
+      test: ["CMD", "wget", "-qO-", "http://localhost:8082/actuator/health/readiness"]
+
+  notification-service:
+    <<: *service
+    build: { context: ., args: { MODULE: notification-service } }
+    image: applyflow/notification-service:local
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      <<: *healthcheck
+      test: ["CMD", "wget", "-qO-", "http://localhost:8083/actuator/health/readiness"]
+
+  gateway:
+    build: { context: ., args: { MODULE: gateway } }
+    image: applyflow/gateway:local
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      REDIS_HOST: redis
+      APPLICATION_SERVICE_URL: http://application-service:8081
+      PAYMENT_SERVICE_URL: http://payment-service:8082
+      NOTIFICATION_SERVICE_URL: http://notification-service:8083
+      JWT_SECRET: ${JWT_SECRET:-local-development-only-secret-0123456789}
+    depends_on:
+      redis:
+        condition: service_healthy
+      application-service:
+        condition: service_healthy
+      payment-service:
+        condition: service_healthy
+      notification-service:
+        condition: service_healthy
+    healthcheck:
+      <<: *healthcheck
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health/readiness"]
+
+volumes:
+  postgres-data:

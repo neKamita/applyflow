@@ -1,0 +1,66 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: gateway
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            # Submissions are rate limited per user: they trigger a payment.
+            - id: submit-application
+              uri: ${APPLICATION_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Method=POST
+                - Path=/api/applications
+              filters:
+                - name: RequestRateLimiter
+                  args:
+                    key-resolver: "#{@userKeyResolver}"
+                    redis-rate-limiter.replenishRate: ${SUBMIT_RATE_PER_SECOND:1}
+                    redis-rate-limiter.burstCapacity: ${SUBMIT_BURST:5}
+            - id: application-service
+              uri: ${APPLICATION_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Path=/api/programs,/api/programs/**,/api/applications,/api/applications/**
+            - id: payment-service
+              uri: ${PAYMENT_SERVICE_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/payments/**
+            - id: notification-service
+              uri: ${NOTIFICATION_SERVICE_URL:http://localhost:8083}
+              predicates:
+                - Path=/api/notifications/**
+
+applyflow:
+  auth:
+    # No default: the gateway refuses to start without a secret.
+    jwt-secret: ${JWT_SECRET}
+    token-ttl: PT1H
+    # Demo accounts. Passwords: aziz-demo-pass, malika-demo-pass.
+    users:
+      - username: aziz
+        password: "{bcrypt}$2a$10$PwjJzMFhb8NP1kMxkqMEb.ScpHAOVlE64YqnBbxolF9wAgi5BzndW"
+      - username: malika
+        password: "{bcrypt}$2a$10$k1PtYbPBo7OPNCypT1g3Puwmd7gmKgYRze0sPXlDczjimwXBkqLQu"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name}]"

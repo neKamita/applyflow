@@ -75,7 +75,7 @@ wait_for_status "$AZIZ" "$(jq -r .id /tmp/applyflow-demo-body)" PAYMENT_FAILED
 
 step "Rate limiting: a burst of submissions from one user"
 codes=""
-for i in $(seq 1 8); do
+for i in $(seq 1 12); do
   codes+="$(submit "$MALIKA" "demo-burst-$RANDOM-$i" wiut-bsc-se tok_visa) "
 done
 echo "$codes"

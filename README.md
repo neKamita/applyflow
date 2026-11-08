@@ -157,7 +157,7 @@ The gateway is the only entry point. It validates the JWT (HS256) and forwards t
 user by setting the header. In Kubernetes a `NetworkPolicy` lets only gateway pods reach the backend
 services, so the header cannot be forged from inside the cluster either.
 
-Submissions are rate limited per user (1 per second, bursts of 5). The demo script sends a burst of 8
+Submissions are rate limited per user (1 per second, bursts of 5). The demo script sends a burst of 12
 and expects `429` for the last ones.
 
 ### Tracing a request

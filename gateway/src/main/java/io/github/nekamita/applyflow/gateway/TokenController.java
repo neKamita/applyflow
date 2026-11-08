@@ -28,6 +28,8 @@ import reactor.core.publisher.Mono;
 @RestController
 class TokenController {
 
+    static final String ISSUER = "applyflow-gateway";
+
     private final ReactiveAuthenticationManager authenticationManager;
     private final JwtEncoder jwtEncoder;
     private final AuthProperties properties;
@@ -52,7 +54,7 @@ class TokenController {
         Instant now = clock.instant();
         List<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("applyflow-gateway")
+                .issuer(ISSUER)
                 .subject(authentication.getName())
                 .issuedAt(now)
                 .expiresAt(now.plus(properties.tokenTtl()))

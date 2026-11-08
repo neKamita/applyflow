@@ -5,16 +5,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.JwsHeader;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -35,6 +42,9 @@ class GatewayIntegrationTest {
 
     @Value("${local.server.port}")
     int port;
+
+    @Autowired
+    JwtEncoder jwtEncoder;
 
     private WebTestClient client;
 
@@ -84,6 +94,9 @@ class GatewayIntegrationTest {
         client.get().uri("/api/applications")
                 .header("Authorization", "Bearer not-a-jwt")
                 .exchange().expectStatus().isUnauthorized();
+        client.get().uri("/api/applications")
+                .header("Authorization", "Bearer " + foreignToken())
+                .exchange().expectStatus().isUnauthorized();
         assertThat(forwardedHeaders).isEmpty();
     }
 
@@ -115,6 +128,18 @@ class GatewayIntegrationTest {
                 .expectStatus().isOk();
 
         assertThat(forwardedHeaders.get("x-correlation-id")).matches("[0-9a-f-]{36}");
+    }
+
+    /** Signed with the right key but issued by someone else. */
+    private String foreignToken() {
+        JwtClaimsSet claims = JwtClaimsSet.builder()
+                .issuer("someone-else")
+                .subject("aziz")
+                .issuedAt(Instant.now())
+                .expiresAt(Instant.now().plusSeconds(60))
+                .build();
+        return jwtEncoder.encode(JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims))
+                .getTokenValue();
     }
 
     private String login(String username, String password) {

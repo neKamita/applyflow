@@ -19,6 +19,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
@@ -42,7 +43,7 @@ class SecurityConfiguration {
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(HttpMethod.POST, "/auth/token").permitAll()
                         .pathMatchers(HttpMethod.GET, "/api/programs", "/api/programs/**").permitAll()
-                        .pathMatchers("/actuator/health/**", "/actuator/prometheus").permitAll()
+                        .pathMatchers("/actuator/health/**").permitAll()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> { }))
                 .build();
@@ -55,7 +56,12 @@ class SecurityConfiguration {
 
     @Bean
     ReactiveJwtDecoder jwtDecoder(SecretKey jwtSigningKey) {
-        return NimbusReactiveJwtDecoder.withSecretKey(jwtSigningKey).macAlgorithm(MacAlgorithm.HS256).build();
+        NimbusReactiveJwtDecoder decoder = NimbusReactiveJwtDecoder.withSecretKey(jwtSigningKey)
+                .macAlgorithm(MacAlgorithm.HS256)
+                .build();
+        // Expiry is checked by default; also reject tokens that this gateway did not issue.
+        decoder.setJwtValidator(JwtValidators.createDefaultWithIssuer(TokenController.ISSUER));
+        return decoder;
     }
 
     @Bean

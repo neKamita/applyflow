@@ -1,0 +1,63 @@
+server:
+  port: 8081
+  shutdown: graceful
+
+spring:
+  application:
+    name: application-service
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/applications}
+    username: ${DB_USERNAME:applyflow}
+    password: ${DB_PASSWORD:applyflow}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    # Required by the outbox relay, which waits for broker confirms before marking events as published.
+    publisher-confirm-type: simple
+    listener:
+      simple:
+        acknowledge-mode: auto
+        default-requeue-rejected: false
+        prefetch: 20
+        retry:
+          enabled: true
+          max-attempts: 4
+          initial-interval: 500ms
+          multiplier: 2
+          max-interval: 5s
+
+applyflow:
+  outbox:
+    poll-interval-ms: 500
+    batch-size: 50
+  cache:
+    program-ttl: PT10M
+  idempotency:
+    ttl: PT24H
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{correlationId:-}]"

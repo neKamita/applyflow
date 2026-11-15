@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T15:45:03+00:00",
+  "title": "Design System: ApplyFlow",
+  "extensions": {
+    "colorMeta": {
+      "cover": {
+        "role": "primary",
+        "displayName": "Passport Cover",
+        "canonical": "oklch(0.31 0.055 222)",
+        "tonalRamp": [
+          "oklch(0.15 0.055 222)",
+          "oklch(0.26 0.055 222)",
+          "oklch(0.37 0.055 222)",
+          "oklch(0.48 0.055 222)",
+          "oklch(0.59 0.055 222)",
+          "oklch(0.70 0.055 222)",
+          "oklch(0.83 0.055 222)",
+          "oklch(0.95 0.055 222)"
+        ]
+      },
+      "cover-raised": {
+        "role": "primary",
+        "displayName": "Cover Raised",
+        "canonical": "oklch(0.37 0.06 222)",
+        "tonalRamp": [
+          "oklch(0.15 0.060 222)",
+          "oklch(0.26 0.060 222)",
+          "oklch(0.37 0.060 222)",
+          "oklch(0.48 0.060 222)",
+          "oklch(0.59 0.060 222)",
+          "oklch(0.70 0.060 222)",
+          "oklch(0.83 0.060 222)",
+          "oklch(0.95 0.060 222)"
+        ]
+      },
+      "on-cover": {
+        "role": "primary",
+        "displayName": "Cover Text",
+        "canonical": "oklch(0.97 0.012 200)",
+        "tonalRamp": [
+          "oklch(0.15 0.012 200)",
+          "oklch(0.26 0.012 200)",
+          "oklch(0.37 0.012 200)",
+          "oklch(0.48 0.012 200)",
+          "oklch(0.59 0.012 200)",
+          "oklch(0.70 0.012 200)",
+          "oklch(0.83 0.012 200)",
+          "oklch(0.95 0.012 200)"
+        ]
+      },
+      "on-cover-muted": {
+        "role": "primary",
+        "displayName": "Cover Text Muted",
+        "canonical": "oklch(0.83 0.03 205)",
+        "tonalRamp": [
+          "oklch(0.15 0.030 205)",
+          "oklch(0.26 0.030 205)",
+          "oklch(0.37 0.030 205)",
+          "oklch(0.48 0.030 205)",
+          "oklch(0.59 0.030 205)",
+          "oklch(0.70 0.030 205)",
+          "oklch(0.83 0.030 205)",
+          "oklch(0.95 0.030 205)"
+        ]
+      },
+      "guilloche": {
+        "role": "primary",
+        "displayName": "Guilloche Line",
+        "canonical": "oklch(0.62 0.07 200)",
+        "tonalRamp": [
+          "oklch(0.15 0.070 200)",
+          "oklch(0.26 0.070 200)",
+          "oklch(0.37 0.070 200)",
+          "oklch(0.48 0.070 200)",
+          "oklch(0.59 0.070 200)",
+          "oklch(0.70 0.070 200)",
+          "oklch(0.83 0.070 200)",
+          "oklch(0.95 0.070 200)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Security Paper",
+        "canonical": "oklch(0.972 0.009 195)",
+        "tonalRamp": [
+          "oklch(0.15 0.009 195)",
+          "oklch(0.26 0.009 195)",
+          "oklch(0.37 0.009 195)",
+          "oklch(0.48 0.009 195)",
+          "oklch(0.59 0.009 195)",
+          "oklch(0.70 0.009 195)",
+          "oklch(0.83 0.009 195)",
+          "oklch(0.95 0.009 195)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Clean Page",
+        "canonical": "oklch(0.993 0.004 195)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 195)",
+          "oklch(0.26 0.004 195)",
+          "oklch(0.37 0.004 195)",
+          "oklch(0.48 0.004 195)",
+          "oklch(0.59 0.004 195)",
+          "oklch(0.70 0.004 195)",
+          "oklch(0.83 0.004 195)",
+          "oklch(0.95 0.004 195)"
+        ]
+      },
+      "sunken": {
+        "role": "neutral",
+        "displayName": "Sunken Page",
+        "canonical": "oklch(0.945 0.012 198)",
+        "tonalRamp": [
+          "oklch(0.15 0.012 198)",
+          "oklch(0.26 0.012 198)",
+          "oklch(0.37 0.012 198)",
+          "oklch(0.48 0.012 198)",
+          "oklch(0.59 0.012 198)",
+          "oklch(0.70 0.012 198)",
+          "oklch(0.83 0.012 198)",
+          "oklch(0.95 0.012 198)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.25 0.03 228)",
+        "tonalRamp": [
+          "oklch(0.15 0.030 228)",
+          "oklch(0.26 0.030 228)",
+          "oklch(0.37 0.030 228)",
+          "oklch(0.48 0.030 228)",
+          "oklch(0.59 0.030 228)",
+          "oklch(0.70 0.030 228)",
+          "oklch(0.83 0.030 228)",
+          "oklch(0.95 0.030 228)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "canonical": "oklch(0.46 0.03 228)",
+        "tonalRamp": [
+          "oklch(0.15 0.030 228)",
+          "oklch(0.26 0.030 228)",
+          "oklch(0.37 0.030 228)",
+          "oklch(0.48 0.030 228)",
+          "oklch(0.59 0.030 228)",
+          "oklch(0.70 0.030 228)",
+          "oklch(0.83 0.030 228)",
+          "oklch(0.95 0.030 228)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(0.87 0.016 205)",
+        "tonalRamp": [
+          "oklch(0.15 0.016 205)",
+          "oklch(0.26 0.016 205)",
+          "oklch(0.37 0.016 205)",
+          "oklch(0.48 0.016 205)",
+          "oklch(0.59 0.016 205)",
+          "oklch(0.70 0.016 205)",
+          "oklch(0.83 0.016 205)",
+          "oklch(0.95 0.016 205)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "canonical": "oklch(0.62 0.03 215)",
+        "tonalRamp": [
+          "oklch(0.15 0.030 215)",
+          "oklch(0.26 0.030 215)",
+          "oklch(0.37 0.030 215)",
+          "oklch(0.48 0.030 215)",
+          "oklch(0.59 0.030 215)",
+          "oklch(0.70 0.030 215)",
+          "oklch(0.83 0.030 215)",
+          "oklch(0.95 0.030 215)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus",
+        "canonical": "oklch(0.52 0.13 215)",
+        "tonalRamp": [
+          "oklch(0.15 0.130 215)",
+          "oklch(0.26 0.130 215)",
+          "oklch(0.37 0.130 215)",
+          "oklch(0.48 0.130 215)",
+          "oklch(0.59 0.130 215)",
+          "oklch(0.70 0.130 215)",
+          "oklch(0.83 0.130 215)",
+          "oklch(0.95 0.130 215)"
+        ]
+      },
+      "stamp-submitted": {
+        "role": "tertiary",
+        "displayName": "Pending Violet",
+        "canonical": "oklch(0.47 0.17 296)",
+        "tonalRamp": [
+          "oklch(0.15 0.170 296)",
+          "oklch(0.26 0.170 296)",
+          "oklch(0.37 0.170 296)",
+          "oklch(0.48 0.170 296)",
+          "oklch(0.59 0.170 296)",
+          "oklch(0.70 0.170 296)",
+          "oklch(0.83 0.170 296)",
+          "oklch(0.95 0.170 296)"
+        ]
+      },
+      "stamp-submitted-soft": {
+        "role": "tertiary",
+        "displayName": "Pending Violet Soft",
+        "canonical": "oklch(0.95 0.03 296)",
+        "tonalRamp": [
+          "oklch(0.15 0.030 296)",
+          "oklch(0.26 0.030 296)",
+          "oklch(0.37 0.030 296)",
+          "oklch(0.48 0.030 296)",
+          "oklch(0.59 0.030 296)",
+          "oklch(0.70 0.030 296)",
+          "oklch(0.83 0.030 296)",
+          "oklch(0.95 0.030 296)"
+        ]
+      },
+      "stamp-paid": {
+        "role": "tertiary",
+        "displayName": "Entry Green",
+        "canonical": "oklch(0.45 0.11 158)",
+        "tonalRamp": [
+          "oklch(0.15 0.110 158)",
+          "oklch(0.26 0.110 158)",
+          "oklch(0.37 0.110 158)",
+          "oklch(0.48 0.110 158)",
+          "oklch(0.59 0.110 158)",
+          "oklch(0.70 0.110 158)",
+          "oklch(0.83 0.110 158)",
+          "oklch(0.95 0.110 158)"
+        ]
+      },
+      "stamp-paid-soft": {
+        "role": "tertiary",
+        "displayName": "Entry Green Soft",
+        "canonical": "oklch(0.95 0.035 158)",
+        "tonalRamp": [
+          "oklch(0.15 0.035 158)",
+          "oklch(0.26 0.035 158)",
+          "oklch(0.37 0.035 158)",
+          "oklch(0.48 0.035 158)",
+          "oklch(0.59 0.035 158)",
+          "oklch(0.70 0.035 158)",
+          "oklch(0.83 0.035 158)",
+          "oklch(0.95 0.035 158)"
+        ]
+      },
+      "stamp-failed": {
+        "role": "tertiary",
+        "displayName": "Exit Vermilion",
+        "canonical": "oklch(0.52 0.19 30)",
+        "tonalRamp": [
+          "oklch(0.15 0.170 30)",
+          "oklch(0.26 0.170 30)",
+          "oklch(0.37 0.170 30)",
+          "oklch(0.48 0.170 30)",
+          "oklch(0.59 0.170 30)",
+          "oklch(0.70 0.170 30)",
+          "oklch(0.83 0.170 30)",
+          "oklch(0.95 0.170 30)"
+        ]
+      },
+      "stamp-failed-soft": {
+        "role": "tertiary",
+        "displayName": "Exit Vermilion Soft",
+        "canonical": "oklch(0.95 0.03 30)",
+        "tonalRamp": [
+          "oklch(0.15 0.030 30)",
+          "oklch(0.26 0.030 30)",
+          "oklch(0.37 0.030 30)",
+          "oklch(0.48 0.030 30)",
+          "oklch(0.59 0.030 30)",
+          "oklch(0.70 0.030 30)",
+          "oklch(0.83 0.030 30)",
+          "oklch(0.95 0.030 30)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Program names, panel headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text and control text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels and badges."
+      },
+      "stamp": {
+        "displayName": "Stamp",
+        "purpose": "Stamp text and application references only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "raised",
+        "value": "0 1px 2px oklch(0.25 0.03 228 / 0.06), 0 4px 12px oklch(0.25 0.03 228 / 0.06)",
+        "purpose": "Reserved for floating layers; not used on resting surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "State transitions and the stamp press-in."
+      },
+      {
+        "name": "stamp-press",
+        "value": "180ms",
+        "purpose": "Duration of the stamp landing."
+      },
+      {
+        "name": "state",
+        "value": "150ms",
+        "purpose": "Colour transitions on hover."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one main action in a view.",
+      "html": "<button class=\"ds-btn-primary\">Submit and pay €75.00</button>",
+      "css": ".ds-btn-primary{background:var(--color-primary);color:var(--color-on-primary);font:500 1rem/1.5rem var(--font-sans);min-height:44px;padding:0 16px;border:0;border-radius:var(--radius-control);transition:background-color 150ms var(--ease-out);cursor:pointer}.ds-btn-primary:hover{background:var(--color-primary-hover)}.ds-btn-primary:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary actions such as Retry or Clear filters.",
+      "html": "<button class=\"ds-btn-secondary\">Clear filters</button>",
+      "css": ".ds-btn-secondary{background:var(--color-panel);color:var(--color-ink);font:500 1rem/1.5rem var(--font-sans);min-height:44px;padding:0 16px;border:1px solid var(--color-line-strong);border-radius:var(--radius-control);cursor:pointer}.ds-btn-secondary:hover{background:var(--color-sunken)}.ds-btn-secondary:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled input with hint and error.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-label\">Email for updates</span><input class=\"ds-input\" value=\"aziz@example.com\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;font-family:var(--font-sans)}.ds-label{font:500 .875rem/1.375rem var(--font-sans);color:var(--color-ink)}.ds-input{min-height:44px;padding:0 12px;font:400 1rem/1.5rem var(--font-sans);color:var(--color-ink);background:var(--color-panel);border:1px solid var(--color-line-strong);border-radius:var(--radius-control)}.ds-input:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}"
+    },
+    {
+      "name": "Cover Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header links on the passport cover.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" aria-current=\"page\" href=\"#\">Programs</a><a class=\"ds-nav-link\" href=\"#\">My applications</a></nav>",
+      "css": ".ds-nav{display:flex;gap:4px;background:var(--color-cover);padding:8px}.ds-nav-link{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:var(--radius-control);color:var(--color-on-cover-muted);text-decoration:none;font:400 1rem/1.5rem var(--font-sans)}.ds-nav-link:hover{background:var(--color-cover-raised);color:var(--color-on-cover)}.ds-nav-link[aria-current=page]{color:var(--color-on-cover);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}.ds-nav-link:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge-paid",
+      "description": "Application status in lists: stamp shape icon plus label.",
+      "html": "<span class=\"ds-badge\"><svg viewBox=\"0 0 160 100\" width=\"16\" height=\"12\" fill=\"none\" stroke=\"currentColor\" aria-hidden=\"true\"><rect x=\"3\" y=\"3\" width=\"154\" height=\"94\" rx=\"6\" stroke-width=\"10\"/></svg>Paid</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:var(--radius-control);background:var(--color-stamp-paid-soft);color:var(--color-stamp-paid);font:500 .875rem/1.375rem var(--font-sans)}"
+    },
+    {
+      "name": "Paid Stamp",
+      "kind": "custom",
+      "refersTo": "status-badge-paid",
+      "description": "Signature: status as a passport stamp on the application page.",
+      "html": "<div class=\"ds-stamp\" role=\"img\" aria-label=\"Paid, 15 Nov 2026\"><span>PAID</span><span class=\"ds-stamp-sub\">15 NOV 2026</span></div>",
+      "css": ".ds-stamp{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:20px 28px;color:var(--color-stamp-paid);font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;border:3px solid currentColor;outline:1px solid currentColor;outline-offset:-9px;border-radius:6px;rotate:-3deg;animation:ds-press 180ms var(--ease-out) both}.ds-stamp-sub{font-size:.8125rem}@keyframes ds-press{from{opacity:0;scale:1.18}}@media (prefers-reduced-motion:reduce){.ds-stamp{animation:none}}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "A page of the passport; never nested.",
+      "html": "<div class=\"ds-panel\"><p class=\"ds-panel-meta\">Technical University of Munich</p><p class=\"ds-panel-title\">MSc Informatics</p></div>",
+      "css": ".ds-panel{background:var(--color-panel);border:1px solid var(--color-line);border-radius:var(--radius-panel);padding:16px;font-family:var(--font-sans)}.ds-panel-meta{margin:0;color:var(--color-ink-muted);font-size:.875rem}.ds-panel-title{margin:0;color:var(--color-ink);font-weight:600;font-size:1.125rem}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Stamped Passport",
+    "overview": "An application is a document that collects verified marks, the way a passport collects entry stamps.\nThe interface is a working tool first: a standard header, filters, lists and forms that a student on a\nphone understands without thinking. The world shows up in four places only: the cover-ink header with\nits guilloche band, the cool security-paper pages, a calm sans-serif voice, and stamps that carry\napplication status.\n\nNothing is stamped early. A stamp appears only when the backend has confirmed the state it shows, so\nthe student can trust what they see while they wait. Density is moderate: rows are scannable, controls\nare 44px tall, and there is no decoration in the work area beyond what carries meaning.",
+    "keyCharacteristics": [
+      "Committed shell colour: the deep blue-green cover owns the header on every page.",
+      "Cool paper, never cream; ink is a tinted near-black, never pure black.",
+      "Status is a stamp: ink colour plus a distinct shape.",
+      "One authored motion: the stamp pressing onto the page.",
+      "Fully bilingual type (Latin and Cyrillic), self-hosted."
+    ],
+    "rules": [
+      {
+        "name": "The Earned Ink Rule",
+        "body": "Stamp inks appear only where they report a real status or error. They are never used for decoration, links or emphasis.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Black Rule",
+        "body": "No pure black or white anywhere; every neutral carries the cover's hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Machine Print Rule",
+        "body": "Monospace is for references and stamp text only, never for headings or labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Fees, dates and counts use tabular numerals so columns line up.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Elevation Rule",
+        "body": "A surface declares depth once: a border or a shadow, never both.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the header in Passport Cover with the guilloche band on every page.",
+      "Do show status with `StatusBadge` or `Stamp` so shape and ink always travel together.",
+      "Do keep every text pair at 4.5:1 and every control border at 3:1 in both themes; add new pairs to",
+      "Do use Golos Text for all interface text and keep inputs at 16px or larger."
+    ],
+    "donts": [
+      "Don't stamp a state before the backend confirms it, and don't animate anything except a newly",
+      "Don't use cream or warm paper, pure black, or gradient text.",
+      "Don't nest panels or use a coloured side border on cards, alerts or list items.",
+      "Don't use monospace for headings, labels or \"technical\" decoration.",
+      "Don't add guilloche or other security patterns inside the work area; the band belongs to the cover."
+    ]
+  }
+}

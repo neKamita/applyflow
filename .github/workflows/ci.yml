@@ -49,6 +49,43 @@ jobs:
         if: always()
         run: docker compose down -v
 
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      # Version comes from the packageManager field in frontend/package.json.
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: frontend/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: frontend/.nvmrc
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm test
+      - run: pnpm build
+      - name: Bundle size budget
+        run: pnpm size
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Component accessibility (axe, light and dark)
+        run: pnpm test:stories
+      - run: pnpm build-storybook --quiet
+      - run: pnpm e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: frontend/playwright-report
+
   manifests:
     name: Validate Kubernetes manifests
     runs-on: ubuntu-latest

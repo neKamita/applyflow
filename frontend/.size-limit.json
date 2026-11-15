@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Initial JS (entry chunk)",
+    "path": "dist/assets/index-*.js",
+    "limit": "170 KB",
+    "gzip": true
+  },
+  {
+    "name": "All JS",
+    "path": "dist/assets/*.js",
+    "limit": "250 KB",
+    "gzip": true
+  }
+]

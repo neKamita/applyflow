@@ -114,7 +114,9 @@ class GatewayIntegrationTest {
                 .header("X-Correlation-Id", "trace-123")
                 .exchange()
                 .expectStatus().isOk()
-                .expectHeader().valueEquals("X-Correlation-Id", "trace-123");
+                // Exactly one value: the gateway and the service both set the header, and a browser
+                // reads two copies as "trace-123, trace-123".
+                .expectHeader().values("X-Correlation-Id", values -> assertThat(values).containsExactly("trace-123"));
 
         assertThat(forwardedHeaders).containsEntry("x-user-id", "malika");
         assertThat(forwardedHeaders).containsEntry("x-correlation-id", "trace-123");
@@ -163,6 +165,11 @@ class GatewayIntegrationTest {
                         forwardedHeaders.put(name.toLowerCase(), values.getFirst()));
                 byte[] body = "[]".getBytes(StandardCharsets.UTF_8);
                 exchange.getResponseHeaders().set("Content-Type", "application/json");
+                // Like the real services (CorrelationIdFilter), echo the correlation id back.
+                String correlationId = exchange.getRequestHeaders().getFirst("X-Correlation-Id");
+                if (correlationId != null) {
+                    exchange.getResponseHeaders().set("X-Correlation-Id", correlationId);
+                }
                 exchange.sendResponseHeaders(200, body.length);
                 exchange.getResponseBody().write(body);
                 exchange.close();

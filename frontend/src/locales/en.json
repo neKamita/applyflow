@@ -1,0 +1,90 @@
+{
+  "app": {
+    "name": "ApplyFlow",
+    "skipLink": "Skip to content",
+    "footer": "Demo project. Not affiliated with the listed universities. Payments are simulated.",
+    "credits": "Program names come from OpenML dataset 43738 (CC0) and the Hipo university list (MIT). Fees and deadlines are illustrative."
+  },
+  "nav": {
+    "label": "Main",
+    "programs": "Programs",
+    "applications": "My applications",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as {{username}}"
+  },
+  "login": {
+    "title": "Sign in to apply",
+    "username": "Username",
+    "password": "Password",
+    "showPassword": "Show password",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "demoHint": "Demo accounts: aziz and malika. Passwords are in the project README.",
+    "required": "Enter your {{field}}.",
+    "invalid": "The username or password is not correct.",
+    "sessionExpired": "Your session ended. Sign in again to continue where you left off.",
+    "network": "Could not reach the server. Check your connection and try again.",
+    "unexpected": "Something went wrong while signing in. Try again in a moment.",
+    "reference": "Reference: {{id}}"
+  },
+  "placeholder": {
+    "programs": "Programs",
+    "programsBody": "The program catalog arrives in the next step.",
+    "applications": "My applications",
+    "applicationsBody": "Your applications will be listed here."
+  },
+  "notFound": {
+    "title": "This page does not exist",
+    "body": "The link may be broken or the page may have moved.",
+    "action": "Browse programs"
+  },
+  "degree": {
+    "BACHELOR": "Bachelor",
+    "MASTER": "Master",
+    "PHD": "PhD"
+  },
+  "catalog": {
+    "title": "Find a program",
+    "search": "Search university or program",
+    "country": "Country",
+    "allCountries": "All countries",
+    "degree": "Degree",
+    "anyDegree": "Any degree",
+    "openOnly": "Open programs only",
+    "count_one": "{{count}} program",
+    "count_other": "{{count}} programs",
+    "fee": "Fee {{amount}}",
+    "closes": "Closes {{date}}, {{when}}",
+    "closed": "Closed {{date}}",
+    "closedBadge": "Closed",
+    "apply": "Apply",
+    "applyTo": "Apply to {{name}}",
+    "emptyTitle": "No programs match these filters",
+    "emptyBody": "Try another country or degree, or clear the filters to see every program.",
+    "clear": "Clear filters",
+    "errorTitle": "Could not load programs",
+    "errorBody": "Check your connection and try again. Your filters are kept.",
+    "retry": "Retry",
+    "loading": "Loading programs"
+  },
+  "program": {
+    "back": "All programs",
+    "fee": "Application fee",
+    "deadline": "Deadline",
+    "deadlineUtc": "{{date}} (UTC)",
+    "illustrative": "Demo value, not the university’s real fee or deadline.",
+    "apply": "Apply for this program",
+    "payNote": "You pay the fee when you submit.",
+    "closed": "Applications closed on {{date}}.",
+    "notFoundTitle": "This program does not exist",
+    "notFoundBody": "The link may be wrong, or the program was removed from the catalog.",
+    "errorTitle": "Could not load this program",
+    "errorBody": "Check your connection and try again.",
+    "retry": "Retry"
+  },
+  "apply": {
+    "title": "Apply",
+    "placeholder": "The application form arrives in the next step."
+  }
+}

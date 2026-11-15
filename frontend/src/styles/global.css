@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+@import '@fontsource/golos-text/400.css';
+@import '@fontsource/golos-text/500.css';
+@import '@fontsource/golos-text/600.css';
+@import '@fontsource/pt-mono/400.css';
+@import './tokens.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Tailwind reads the runtime variables, so switching theme needs no rebuild. */
+@theme inline {
+  --color-cover: var(--color-cover);
+  --color-cover-raised: var(--color-cover-raised);
+  --color-on-cover: var(--color-on-cover);
+  --color-on-cover-muted: var(--color-on-cover-muted);
+  --color-guilloche: var(--color-guilloche);
+  --color-paper: var(--color-paper);
+  --color-panel: var(--color-panel);
+  --color-sunken: var(--color-sunken);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-focus: var(--color-focus);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-on-primary: var(--color-on-primary);
+  --color-stamp-submitted: var(--color-stamp-submitted);
+  --color-stamp-submitted-soft: var(--color-stamp-submitted-soft);
+  --color-stamp-paid: var(--color-stamp-paid);
+  --color-stamp-paid-soft: var(--color-stamp-paid-soft);
+  --color-stamp-failed: var(--color-stamp-failed);
+  --color-stamp-failed-soft: var(--color-stamp-failed-soft);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --radius-control: var(--radius-control);
+  --radius-panel: var(--radius-panel);
+  --shadow-raised: var(--shadow-raised);
+  --ease-out: var(--ease-out);
+
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.375rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.875rem;
+  --text-2xl: 1.75rem;
+  --text-2xl--line-height: 2.25rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'tnum' 0;
+    scrollbar-color: var(--color-line-strong) var(--color-paper);
+    accent-color: var(--color-primary);
+    caret-color: var(--color-focus);
+  }
+
+  body {
+    min-height: 100dvh;
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+
+  ::selection {
+    background: var(--color-stamp-submitted-soft);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@theme {
+  --animate-stamp: stamp-press 180ms var(--ease-out) both;
+
+  @keyframes stamp-press {
+    from {
+      opacity: 0;
+      /* Individual scale property: composes with the rotate utility instead of replacing it. */
+      scale: 1.18;
+    }
+  }
+}

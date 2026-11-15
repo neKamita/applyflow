@@ -283,7 +283,16 @@ payment-service/        payment processing, simulated provider
 notification-service/   notifications
 k8s/                    Kustomize manifests
 scripts/demo.sh         end-to-end scenario used locally and in CI
+scripts/catalog/        builds the demo program catalog migration from public datasets
+frontend/               React web app (see PRODUCT.md and DESIGN.md)
 ```
+
+## Data
+
+The demo catalog (migration V3) uses university, country and program names from
+[OpenML dataset 43738](https://www.openml.org/d/43738) (CC0), filtered against the
+[Hipo university-domains-list](https://github.com/Hipo/university-domains-list) (MIT). Application fees
+and deadlines are illustrative. See [`scripts/catalog`](scripts/catalog/README.md).
 
 ## License
 

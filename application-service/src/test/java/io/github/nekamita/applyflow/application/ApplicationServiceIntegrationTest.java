@@ -2,6 +2,9 @@ package io.github.nekamita.applyflow.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -175,6 +178,19 @@ class ApplicationServiceIntegrationTest {
 
         String cached = redis.opsForValue().get("applyflow:program::kaist-msc-ai");
         assertThat(cached).contains("\"university\":\"KAIST\"");
+    }
+
+    @Test
+    void catalogContainsTheExpandedSeed() throws Exception {
+        mockMvc.perform(get("/api/programs"))
+                .andExpect(status().isOk())
+                // V2's five programs plus the 32 from V3.
+                .andExpect(jsonPath("$.length()").value(37))
+                .andExpect(jsonPath("$[?(@.id == 'tum-msc-informatics')]").exists())
+                .andExpect(jsonPath("$[?(@.id == 'university-of-british-columbia-msc-computer-science')].currency")
+                        .value("CAD"))
+                .andExpect(jsonPath("$[*].currency", everyItem(matchesPattern("[A-Z]{3}"))))
+                .andExpect(jsonPath("$[*].degree", hasItem("BACHELOR")));
     }
 
     private ResultActions submit(String idempotencyKey, String programId, String paymentToken) throws Exception {

@@ -28,7 +28,12 @@ class UserContextFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String incomingCorrelationId = exchange.getRequest().getHeaders().getFirst(CORRELATION_ID);
         String correlationId = isSafe(incomingCorrelationId) ? incomingCorrelationId : UUID.randomUUID().toString();
-        exchange.getResponse().getHeaders().set(CORRELATION_ID, correlationId);
+        // Set at commit time, after the proxied response headers have been copied in: the services echo
+        // the id too, and setting it earlier would leave two copies ("id, id" in a browser).
+        exchange.getResponse().beforeCommit(() -> {
+            exchange.getResponse().getHeaders().set(CORRELATION_ID, correlationId);
+            return Mono.empty();
+        });
 
         return exchange.getPrincipal()
                 .filter(JwtAuthenticationToken.class::isInstance)

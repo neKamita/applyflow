@@ -17,7 +17,7 @@ x-service: &service
 
 services:
   postgres:
-    image: postgres:18-alpine
+    image: docker.io/library/postgres:18-alpine
     environment:
       POSTGRES_USER: applyflow
       POSTGRES_PASSWORD: applyflow
@@ -30,7 +30,7 @@ services:
       retries: 10
 
   rabbitmq:
-    image: rabbitmq:4-management-alpine
+    image: docker.io/library/rabbitmq:4-management-alpine
     ports:
       - "15672:15672" # management UI, guest/guest
     healthcheck:
@@ -39,7 +39,7 @@ services:
       retries: 20
 
   redis:
-    image: redis:8-alpine
+    image: docker.io/library/redis:8-alpine
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
